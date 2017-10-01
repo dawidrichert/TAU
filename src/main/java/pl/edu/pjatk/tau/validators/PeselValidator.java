@@ -3,28 +3,28 @@ package pl.edu.pjatk.tau.validators;
 public class PeselValidator implements Validator {
 
     private byte PESEL[] = new byte[11];
-    private boolean valid = false;
+    private String pesel;
 
-    public PeselValidator(String PESELNumber) {
-        if (PESELNumber == null || PESELNumber.length() != 11){
-            valid = false;
-        }
-        else {
-            try {
-                for (int i = 0; i < 11; i++){
-                    PESEL[i] = Byte.parseByte(PESELNumber.substring(i, i+1));
-                }
-                valid = checkSum() && checkMonth() && checkDay();
-            }
-            catch (NumberFormatException e) {
-                valid = false;
-            }
-        }
+    public PeselValidator(String pesel) {
+        this.pesel = pesel;
     }
 
     @Override
     public boolean isValid() {
-        return valid;
+        if (pesel == null || pesel.length() != 11){
+            return false;
+        }
+        else {
+            try {
+                for (int i = 0; i < 11; i++){
+                    PESEL[i] = Byte.parseByte(pesel.substring(i, i+1));
+                }
+                return checkSum() && checkMonth() && checkDay();
+            }
+            catch (NumberFormatException e) {
+                return false;
+            }
+        }
     }
 
     public int getBirthYear() {
