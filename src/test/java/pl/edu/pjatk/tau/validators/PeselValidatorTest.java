@@ -33,7 +33,7 @@ public class PeselValidatorTest extends TestCase {
     }
 
     public void testShouldReturnFalseWhenPeselIsNotMatchedToDateOfBirth() {
-        PeselValidator peselValidator = new PeselValidator("51030502097");
+        PeselValidator peselValidator = new PeselValidator("59041311273");
         LocalDate localDate = LocalDate.of(1994, 8, 5);
 
         boolean result = peselValidator.isValid()
@@ -45,11 +45,7 @@ public class PeselValidatorTest extends TestCase {
     }
 
     public void testShouldReturnFalseWhenPeselContainsNotAllowedCharacters() {
-        PeselValidator peselValidator = new PeselValidator("adj374819dj");
-
-        boolean result = peselValidator.isValid();
-
-        assertFalse(result);
+        assertFalse(new PeselValidator("adj374819dj").isValid());
     }
 
     public void testShouldReturnFalseWhenPeselHasLessThan11Characters() {
