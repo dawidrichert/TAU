@@ -14,8 +14,8 @@ public class GotowyPsikus implements Psikus {
     public Integer cyfrokrad(Integer liczba) {
         if (liczba != null && liczba > 9) {
             StringBuilder sb = new StringBuilder(liczba.toString());
-            int randomIndex = rand.nextInt(sb.length());
-            sb.deleteCharAt(randomIndex);
+            removeRandomCharacter(sb);
+
             return Integer.parseInt(sb.toString());
         }
         return null;
@@ -26,23 +26,11 @@ public class GotowyPsikus implements Psikus {
         if (liczba != null && liczba > 9) {
             StringBuilder sb = new StringBuilder(liczba.toString());
 
-            int randomIndex = rand.nextInt(sb.length());
-            char firstNumber = sb.charAt(randomIndex);
-            sb.deleteCharAt(randomIndex);
+            char firstNumber = returnAndRemoveRandomCharacter(sb);
+            char secondNumber = returnAndRemoveRandomCharacter(sb);
 
-            randomIndex = rand.nextInt(sb.length());
-            char secondNumber = sb.charAt(randomIndex);
-            sb.deleteCharAt(randomIndex);
-
-            if (sb.length() > 0) {
-                randomIndex = rand.nextInt(sb.length());
-            } else {
-                randomIndex = 0;
-            }
-            sb.insert(randomIndex, firstNumber);
-
-            randomIndex = rand.nextInt(sb.length());
-            sb.insert(randomIndex, secondNumber);
+            insertCharacterToRandomPlace(firstNumber, sb);
+            insertCharacterToRandomPlace(secondNumber, sb);
 
             return Integer.parseInt(sb.toString());
         }
@@ -71,5 +59,30 @@ public class GotowyPsikus implements Psikus {
         }
 
         return liczba;
+    }
+
+    private int getRandomIndex(StringBuilder sb) {
+        return rand.nextInt(sb.length());
+    }
+
+    private void insertCharacterToRandomPlace(char character, StringBuilder sb) {
+        int randomIndex = 0;
+        if (sb.length() > 0) {
+            randomIndex = getRandomIndex(sb);
+        }
+
+        sb.insert(randomIndex, character);
+    }
+
+    private char returnAndRemoveRandomCharacter(StringBuilder sb) {
+        int randomIndex = getRandomIndex(sb);
+        char character = sb.charAt(randomIndex);
+        sb.deleteCharAt(randomIndex);
+        return character;
+    }
+
+    private void removeRandomCharacter(StringBuilder sb) {
+        int randomIndex = getRandomIndex(sb);
+        sb.deleteCharAt(randomIndex);
     }
 }
