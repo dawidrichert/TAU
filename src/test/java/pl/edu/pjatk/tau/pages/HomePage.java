@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends PageObject {
+
+    private static final PageElement SIGN_IN_MENU_BUTTON = new PageElement(null, "//a[contains(text(), 'Sign in')]");
+
     private static final String PAGE_URL = "http://automationpractice.com/index.php";
 
     private static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -20,6 +23,10 @@ public class HomePage extends PageObject {
 
     public void clickBestSellersButton() {
         driver.findElement(By.className("blockbestsellers")).click();
+    }
+
+    public void clickSignInMenuButton() {
+        clickOn(SIGN_IN_MENU_BUTTON);
     }
 
     public boolean isElementDisplayed(String linkText) {

@@ -15,12 +15,12 @@ abstract class PageObject {
         findElement(pageElement).click();
     }
 
-    private WebElement findElement(PageElement pageElement) {
+    WebElement findElement(PageElement pageElement) {
         if (pageElement.getId() != null) {
             return driver.findElement(By.id(pageElement.getId()));
         }
         if (pageElement.getXpath() != null) {
-            return driver.findElement(By.xpath(pageElement.getId()));
+            return driver.findElement(By.xpath(pageElement.getXpath()));
         }
         return null;
     }

@@ -93,8 +93,8 @@ public class TestScenarios {
         homePage.navigate();
         homePage.goToLoginPage();
         loginPage.setEmailAddress(homePage.randomString(6) + EMAIL_POSTFIX);
-        loginPage.goToCreateAccountPage();
-        createAccount.submitAccountClick();
+        loginPage.clickCreateAccountButton();
+        createAccount.clickRegisterButton();
 
         assertTrue(createAccount.checkErrorsValidFields());
     }
@@ -104,8 +104,8 @@ public class TestScenarios {
         loginPage.navigate();
 
         loginPage.setEmailAddress(homePage.randomString(6) + EMAIL_POSTFIX);
-        loginPage.goToCreateAccountPage();
-        createAccount.CheckGender("M");
+        loginPage.clickCreateAccountButton();
+        createAccount.checkGender("M");
         createAccount.setFirstName("John");
         createAccount.setLastName("Smith");
         createAccount.setPassword("password123");
@@ -116,7 +116,7 @@ public class TestScenarios {
         createAccount.setState("Alabama");
         createAccount.setMobilePhone("111222333");
         createAccount.setZipCode("12345");
-        createAccount.submitAccountClick();
+        createAccount.clickRegisterButton();
 
         driver.findElement(By.cssSelector("#header > div.nav > div > div > nav > div:nth-child(2) > a")).isDisplayed();//sign out button
         driver.findElement(By.cssSelector("#header > div.nav > div > div > nav > div:nth-child(2) > a")).click();

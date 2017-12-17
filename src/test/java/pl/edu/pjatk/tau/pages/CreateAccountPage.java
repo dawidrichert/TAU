@@ -6,7 +6,12 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Objects;
 
+import static pl.edu.pjatk.tau.TestScenarios.APP_URL;
+
 public class CreateAccountPage extends PageObject {
+
+    private static final PageElement PAGE_HEADER = new PageElement(null, "//h1[contains(text(), 'Create an account')]");
+    private static final PageElement REGISTER_BUTTON = new PageElement("submitAccount");
 
     private static final String FIRST_NAME_INPUT_ID = "customer_firstname";
     private static final String LAST_NAME_INPUT_ID = "customer_lastname";
@@ -25,15 +30,15 @@ public class CreateAccountPage extends PageObject {
         super(driver);
     }
 
-    public void submitAccountClick () {
-        driver.findElement(By.id("submitAccount")).click();
+    public void clickRegisterButton () {
+        clickOn(REGISTER_BUTTON);
     }
 
     public boolean checkErrorsValidFields(){
         return driver.findElement(By.xpath("//*[@id=\"center_column\"]/div")).isDisplayed();
     }
 
-    public void CheckGender(String gender){
+    public void checkGender(String gender){
         if (Objects.equals(gender, "M")) {
             driver.findElement(By.id("id_gender1")).click();
         } else {
@@ -88,5 +93,9 @@ public class CreateAccountPage extends PageObject {
     public void setMobilePhone(String number) {
         driver.findElement(By.id(PHONE_INPUT_ID)).click();
         driver.findElement(By.id(PHONE_INPUT_ID)).sendKeys(number);
+    }
+
+    public boolean isDisplayed() {
+        return findElement(PAGE_HEADER).isDisplayed();
     }
 }

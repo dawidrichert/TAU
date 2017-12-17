@@ -9,6 +9,7 @@ public class LoginPage extends PageObject {
 
     private static final PageElement CREATE_ACCOUNT_BUTTON = new PageElement("SubmitCreate");
     private static final PageElement SUBMIT_LOGIN_BUTTON = new PageElement("SubmitLogin");
+    private static final PageElement PAGE_HEADER = new PageElement(null, "//h1[contains(text(), 'Authentication')]");
     private static final String EMAIL_CREATE_INPUT_ID = "email_create";
     private static final String EMAIL_INPUT_ID = "email";
     private static final String PASSWORD_INPUT_ID = "passwd";
@@ -23,7 +24,7 @@ public class LoginPage extends PageObject {
         driver.findElement(By.id(EMAIL_CREATE_INPUT_ID)).sendKeys(email);
     }
 
-    public void goToCreateAccountPage() {
+    public void clickCreateAccountButton() {
         clickOn(CREATE_ACCOUNT_BUTTON);
     }
 
@@ -43,5 +44,13 @@ public class LoginPage extends PageObject {
 
     public void navigate() {
         driver.get(PAGE_URL);
+    }
+
+    public boolean alertMessageIsDisplayed(String message) {
+        return driver.findElement(By.xpath("//div[contains(@class, 'alert')]//li[contains(text(), '" + message + "')]")).isDisplayed();
+    }
+
+    public boolean isDisplayed() {
+        return findElement(PAGE_HEADER).isDisplayed();
     }
 }
